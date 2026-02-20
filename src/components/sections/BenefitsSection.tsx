@@ -1,17 +1,23 @@
+import { Bed, Award, Plane, Shield } from "lucide-react";
+
 const benefits = [
   {
+    icon: Bed,
     title: "Indução Rápida do Sono",
     description: "Ajuda a regular seu ciclo circadiano, sinalizando ao corpo que é hora de dormir.",
   },
   {
+    icon: Award,
     title: "Qualidade de Sono Superior",
     description: "Promove um sono mais profundo e restaurador, para que você acorde renovado.",
   },
   {
+    icon: Plane,
     title: "Alívio do Jet Lag",
     description: "Auxilia na adaptação a novos fusos horários, minimizando os efeitos do jet lag.",
   },
   {
+    icon: Shield,
     title: "Apoio Antioxidante",
     description: "A melatonina possui propriedades antioxidantes que protegem as células.",
   },
@@ -34,9 +40,12 @@ const BenefitsSection = () => {
           {benefits.map((benefit, index) => (
             <div 
               key={index}
-              className="deck-card"
+              className="deck-card group"
               style={{ '--index': index } as React.CSSProperties}
             >
+              <div className="absolute top-8 right-8 bg-primary/10 text-primary p-3 rounded-full group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300 ease-in-out">
+                <benefit.icon className="h-6 w-6" />
+              </div>
               <span className="card-tag">Benefício {index + 1}</span>
               <h2>{benefit.title}</h2>
               <p>{benefit.description}</p>
