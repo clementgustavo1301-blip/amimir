@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { variants, type ProductVariant } from '@/lib/variants';
+import { variants } from '@/lib/variants';
 import Preloader from '@/components/Preloader';
 import Header from '@/components/layout/Header';
 import Hero from '@/components/Hero';
@@ -17,25 +17,16 @@ import Footer from '@/components/layout/Footer';
 const sectionIds = ['home', 'sobre', 'beneficios', 'ingredientes', 'como-usar', 'avaliacoes', 'faq', 'contato'];
 
 export default function Home() {
-  const [currentVariantIndex, setCurrentVariantIndex] = useState(0);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [initialLoadingProgress, setInitialLoadingProgress] = useState(0);
   
-  const currentVariant = variants[currentVariantIndex];
+  const currentVariant = variants[0];
 
   useEffect(() => {
-    document.documentElement.style.setProperty('--variant-color-hsl', currentVariant.themeColor);
+    if (currentVariant) {
+      document.documentElement.style.setProperty('--variant-color-hsl', currentVariant.themeColor);
+    }
   }, [currentVariant]);
-
-  const handleSwitchVariant = (direction: 'next' | 'prev') => {
-    setCurrentVariantIndex(prevIndex => {
-      if (direction === 'next') {
-        return (prevIndex + 1) % variants.length;
-      } else {
-        return (prevIndex - 1 + variants.length) % variants.length;
-      }
-    });
-  };
   
   if (isInitialLoading) {
     return (
@@ -54,9 +45,6 @@ export default function Home() {
       <main>
         <Hero
           variant={currentVariant}
-          variantIndex={currentVariantIndex}
-          onSwitchVariant={handleSwitchVariant}
-          totalVariants={variants.length}
         />
         <div className="relative z-10 bg-background">
           <AboutSection />

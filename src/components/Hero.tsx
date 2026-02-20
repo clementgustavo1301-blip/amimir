@@ -3,25 +3,19 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { type ProductVariant } from '@/lib/variants';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type HeroProps = {
   variant: ProductVariant;
-  variantIndex: number;
-  totalVariants: number;
-  onSwitchVariant: (direction: 'next' | 'prev') => void;
 };
 
-const Hero = ({ variant, variantIndex, totalVariants, onSwitchVariant }: HeroProps) => {
+const Hero = ({ variant }: HeroProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const [isVariantLoading, setIsVariantLoading] = useState(true);
   const [showText, setShowText] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   
   const preloadImages = useCallback((v: ProductVariant) => {
-    setIsVariantLoading(true);
     setShowText(false);
     
     let loadedCount = 0;
@@ -32,7 +26,6 @@ const Hero = ({ variant, variantIndex, totalVariants, onSwitchVariant }: HeroPro
       loadedCount++;
       if (loadedCount === numImages) {
         setImages(newImages);
-        setIsVariantLoading(false);
         setTimeout(() => setShowText(true), 100);
       }
     };
@@ -52,7 +45,7 @@ const Hero = ({ variant, variantIndex, totalVariants, onSwitchVariant }: HeroPro
   }, [variant, preloadImages]);
 
   useEffect(() => {
-    if (!images.length || isVariantLoading) return;
+    if (!images.length) return;
 
     const canvas = canvasRef.current;
     const context = canvas?.getContext('2d');
@@ -101,13 +94,7 @@ const Hero = ({ variant, variantIndex, totalVariants, onSwitchVariant }: HeroPro
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, [images, isVariantLoading]);
-
-
-  const handleVariantClick = (direction: 'next' | 'prev') => {
-    if(isVariantLoading) return;
-    onSwitchVariant(direction);
-  }
+  }, [images]);
 
   return (
     <div id="home" ref={scrollRef} className="h-[300vh] relative">
@@ -137,28 +124,6 @@ const Hero = ({ variant, variantIndex, totalVariants, onSwitchVariant }: HeroPro
                 Saber Mais
               </Button>
             </div>
-          </div>
-        </div>
-
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-4 md:gap-8 p-4 md:p-8">
-          <div className="text-white text-center">
-            <div className="text-5xl md:text-7xl font-black font-mono">
-              {String(variantIndex + 1).padStart(2, '0')}
-            </div>
-          </div>
-          <div className="flex flex-col items-center gap-4">
-            <button onClick={() => handleVariantClick('prev')} disabled={isVariantLoading} className="text-white/70 hover:text-white transition-colors" aria-label="Previous Variant">
-              <span className="text-xs">PREV</span>
-              <ArrowLeft className="h-6 w-6 mx-auto transform -rotate-90" />
-            </button>
-            <div className="h-24 w-px bg-white/30" />
-            
-            {isVariantLoading && <Loader2 className="h-6 w-6 text-white animate-spin my-2" />}
-
-            <button onClick={() => handleVariantClick('next')} disabled={isVariantLoading} className="text-white/70 hover:text-white transition-colors" aria-label="Next Variant">
-              <ArrowRight className="h-6 w-6 mx-auto transform -rotate-90" />
-              <span className="text-xs">NEXT</span>
-            </button>
           </div>
         </div>
       </div>
