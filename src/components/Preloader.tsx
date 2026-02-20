@@ -16,28 +16,53 @@ type PreloaderProps = {
 const Preloader = ({ progress, variant, onLoadComplete, onProgress, onImagesLoaded }: PreloaderProps) => {
 
   const preloadInitialImages = useCallback(() => {
-    let loadedCount = 0;
     const numImages = variant.frameCount;
-    const newImages: HTMLImageElement[] = [];
-    
-    const imageLoaded = () => {
+    const images: HTMLImageElement[] = Array.from({ length: numImages });
+    const promises: Promise<any>[] = [];
+    let loadedCount = 0;
+
+    const onSingleImageLoad = () => {
       loadedCount++;
-      const currentProgress = (loadedCount / numImages) * 100;
-      onProgress(currentProgress);
-      if (loadedCount === numImages) {
-        onImagesLoaded(newImages);
-        setTimeout(onLoadComplete, 500); // Small delay for smooth transition
-      }
+      onProgress((loadedCount / numImages) * 100);
     };
 
     for (let i = 0; i < numImages; i++) {
       const img = new Image();
+      images[i] = img;
       const frameNumber = String(i).padStart(3, '0');
       img.src = `${variant.framesPath}frame_${frameNumber}_delay-0.042s.webp`;
-      img.onload = imageLoaded;
-      img.onerror = imageLoaded;
-      newImages.push(img);
+      
+      const promise = new Promise((resolve, reject) => {
+        img.onload = () => {
+          onSingleImageLoad();
+          resolve(img);
+        };
+        img.onerror = (err) => {
+          console.error(`Failed to load image frame: ${i}`, err);
+          onSingleImageLoad(); // Still count it to not block the preloader
+          resolve(null); // Resolve with null on error
+        };
+      });
+      promises.push(promise);
     }
+
+    Promise.all(promises).then((loadedImageElements) => {
+      const successfulImages = loadedImageElements.filter(img => img !== null) as HTMLImageElement[];
+      onImagesLoaded(successfulImages);
+
+      // Now, ensure all successfully loaded images are also fully decoded
+      Promise.all(successfulImages.map(img => img.decode()))
+        .then(() => {
+          // All images are loaded and decoded, ready for smooth playback
+          setTimeout(onLoadComplete, 300); // A small delay for a smoother transition
+        })
+        .catch(err => {
+          console.error("Error decoding images:", err);
+          // If decoding fails, still proceed. The browser might handle it.
+          setTimeout(onLoadComplete, 300);
+        });
+    });
+
   }, [variant, onLoadComplete, onProgress, onImagesLoaded]);
 
   useEffect(() => {
