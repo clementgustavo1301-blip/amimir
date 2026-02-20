@@ -26,6 +26,8 @@ const Hero = ({ variant, preloadedImages }: HeroProps) => {
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
     
+    canvas.style.transition = 'filter 0.5s ease'; // Add transition for smooth blur
+
     const render = () => {
       const scrollElement = scrollRef.current;
       if (!scrollElement) return;
@@ -38,6 +40,13 @@ const Hero = ({ variant, preloadedImages }: HeroProps) => {
         images.length - 1,
         Math.floor(scrollFraction * images.length)
       );
+
+      // Apply blur to the last 3 frames
+      if (frameIndex >= images.length - 3) {
+        canvas.style.filter = 'blur(4px)';
+      } else {
+        canvas.style.filter = 'none';
+      }
 
       const img = images[frameIndex];
       if (img && img.complete) {
