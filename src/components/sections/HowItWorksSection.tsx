@@ -1,6 +1,6 @@
 "use client";
 
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useRef } from "react";
 import {
   TestTube,
   Citrus,
@@ -52,7 +52,6 @@ export default function HowItWorksSection() {
   const div5Ref = useRef<HTMLDivElement>(null); // Sono Rápido
   const div6Ref = useRef<HTMLDivElement>(null); // Sono Profundo
   const div7Ref = useRef<HTMLDivElement>(null); // Acordar Renovado
-  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <section id="como-funciona" className="py-24 sm:py-32 bg-background">
@@ -69,8 +68,6 @@ export default function HowItWorksSection() {
         <div
           className="relative flex h-[500px] w-full items-center justify-center overflow-hidden rounded-lg border bg-card p-10 md:shadow-xl"
           ref={containerRef}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         >
           <div className="flex h-full w-full flex-col items-stretch justify-between gap-10">
             {/* Inputs */}
@@ -129,16 +126,47 @@ export default function HowItWorksSection() {
           </div>
 
           {/* Beams */}
-          {isHovered && (
-            <>
-              <AnimatedBeam containerRef={containerRef} fromRef={div1Ref} toRef={div4Ref} curvature={-40} endYOffset={-10} />
-              <AnimatedBeam containerRef={containerRef} fromRef={div2Ref} toRef={div4Ref} />
-              <AnimatedBeam containerRef={containerRef} fromRef={div3Ref} toRef={div4Ref} curvature={40} endYOffset={10} />
-              <AnimatedBeam containerRef={containerRef} fromRef={div4Ref} toRef={div5Ref} curvature={40} endYOffset={10} reverse />
-              <AnimatedBeam containerRef={containerRef} fromRef={div4Ref} toRef={div6Ref} reverse />
-              <AnimatedBeam containerRef={containerRef} fromRef={div4Ref} toRef={div7Ref} curvature={-40} endYOffset={-10} reverse />
-            </>
-          )}
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={div1Ref}
+            toRef={div4Ref}
+            curvature={-40}
+            endYOffset={-10}
+          />
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={div2Ref}
+            toRef={div4Ref}
+          />
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={div3Ref}
+            toRef={div4Ref}
+            curvature={40}
+            endYOffset={10}
+          />
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={div4Ref}
+            toRef={div5Ref}
+            curvature={40}
+            endYOffset={10}
+            reverse
+          />
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={div4Ref}
+            toRef={div6Ref}
+            reverse
+          />
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={div4Ref}
+            toRef={div7Ref}
+            curvature={-40}
+            endYOffset={-10}
+            reverse
+          />
         </div>
       </div>
     </section>
