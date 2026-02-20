@@ -10,19 +10,22 @@ type PreloaderProps = {
   variant: ProductVariant;
   onLoadComplete: () => void;
   onProgress: (progress: number) => void;
+  onImagesLoaded: (images: HTMLImageElement[]) => void;
 };
 
-const Preloader = ({ progress, variant, onLoadComplete, onProgress }: PreloaderProps) => {
+const Preloader = ({ progress, variant, onLoadComplete, onProgress, onImagesLoaded }: PreloaderProps) => {
 
   const preloadInitialImages = useCallback(() => {
     let loadedCount = 0;
     const numImages = variant.frameCount;
+    const newImages: HTMLImageElement[] = [];
     
     const imageLoaded = () => {
       loadedCount++;
       const currentProgress = (loadedCount / numImages) * 100;
       onProgress(currentProgress);
       if (loadedCount === numImages) {
+        onImagesLoaded(newImages);
         setTimeout(onLoadComplete, 500); // Small delay for smooth transition
       }
     };
@@ -33,8 +36,9 @@ const Preloader = ({ progress, variant, onLoadComplete, onProgress }: PreloaderP
       img.src = `${variant.framesPath}frame_${frameNumber}_delay-0.042s.webp`;
       img.onload = imageLoaded;
       img.onerror = imageLoaded;
+      newImages.push(img);
     }
-  }, [variant, onLoadComplete, onProgress]);
+  }, [variant, onLoadComplete, onProgress, onImagesLoaded]);
 
   useEffect(() => {
     preloadInitialImages();

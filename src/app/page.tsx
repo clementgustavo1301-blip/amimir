@@ -19,6 +19,7 @@ const sectionIds = ['home', 'sobre', 'beneficios', 'ingredientes', 'como-usar', 
 export default function Home() {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [initialLoadingProgress, setInitialLoadingProgress] = useState(0);
+  const [preloadedImages, setPreloadedImages] = useState<HTMLImageElement[]>([]);
   
   const currentVariant = variants[0];
 
@@ -35,6 +36,7 @@ export default function Home() {
         variant={currentVariant}
         onLoadComplete={() => setIsInitialLoading(false)}
         onProgress={setInitialLoadingProgress}
+        onImagesLoaded={setPreloadedImages}
       />
     );
   }
@@ -45,6 +47,7 @@ export default function Home() {
       <main>
         <Hero
           variant={currentVariant}
+          preloadedImages={preloadedImages}
         />
         <div className="relative z-10 bg-background">
           <AboutSection />

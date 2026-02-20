@@ -1,48 +1,27 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { type ProductVariant } from '@/lib/variants';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 type HeroProps = {
   variant: ProductVariant;
+  preloadedImages: HTMLImageElement[];
 };
 
-const Hero = ({ variant }: HeroProps) => {
+const Hero = ({ variant, preloadedImages }: HeroProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
   const [showText, setShowText] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   
-  const preloadImages = useCallback((v: ProductVariant) => {
-    setShowText(false);
-    
-    let loadedCount = 0;
-    const numImages = v.frameCount;
-    const newImages: HTMLImageElement[] = [];
-    
-    const imageLoaded = () => {
-      loadedCount++;
-      if (loadedCount === numImages) {
-        setImages(newImages);
-        setTimeout(() => setShowText(true), 100);
-      }
-    };
-
-    for (let i = 0; i < numImages; i++) {
-      const img = new Image();
-      const frameNumber = String(i).padStart(3, '0');
-      img.src = `${v.framesPath}frame_${frameNumber}_delay-0.042s.webp`;
-      img.onload = imageLoaded;
-      img.onerror = imageLoaded; // Count errors as loaded to not block forever
-      newImages.push(img);
-    }
-  }, []);
-
   useEffect(() => {
-    preloadImages(variant);
-  }, [variant, preloadImages]);
+    if (preloadedImages.length > 0) {
+      setImages(preloadedImages);
+      setTimeout(() => setShowText(true), 100);
+    }
+  }, [preloadedImages]);
 
   useEffect(() => {
     if (!images.length) return;
@@ -77,8 +56,10 @@ const Hero = ({ variant }: HeroProps) => {
     };
     
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
       requestAnimationFrame(render);
     };
     
