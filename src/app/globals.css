@@ -111,3 +111,116 @@
   margin: 0;
   max-width: 90%;
 }
+
+
+/* --- Interactive CTA Button --- */
+.botao-amimir-interativo {
+  position: relative;
+  width: 280px; 
+  height: 70px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+  box-shadow: 0 10px 25px hsla(var(--primary) / 0.4);
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.botao-amimir-interativo:not(.ativo) {
+  animation: pulsarSuave 2s infinite;
+}
+
+.estado-comprar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: hsl(var(--accent-foreground));
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+}
+
+.btn-icone { 
+  width: 24px; 
+  height: 24px; 
+  color: hsl(var(--accent-foreground));
+}
+
+.estado-dormindo {
+  opacity: 0;
+  transform: translate(-50%, 20px);
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: white;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.personagem-nuvem {
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  padding: 5px;
+}
+.emoji-sono { font-size: 2.5rem; }
+.texto-final { font-weight: 600; font-size: 1.1rem; }
+
+.botao-amimir-interativo.ativo {
+  background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary)));
+  box-shadow: 0 10px 25px hsla(var(--background) / 0.4);
+  width: 300px;
+  cursor: default;
+}
+
+.botao-amimir-interativo.ativo .estado-comprar {
+  opacity: 0;
+  transform: translate(-50%, -50px) scale(0.8);
+}
+
+.botao-amimir-interativo.ativo .estado-dormindo {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+.zzz-container {
+  position: absolute;
+  top: -10px;
+  left: 45px;
+}
+
+.z-flutuante {
+  position: absolute;
+  font-weight: 800;
+  color: hsl(var(--muted-foreground));
+  opacity: 0;
+}
+
+.botao-amimir-interativo.ativo .z1 { animation: flutuarZ 2s ease-out infinite 0.2s; font-size: 0.8rem;}
+.botao-amimir-interativo.ativo .z2 { animation: flutuarZ 2s ease-out infinite 0.6s; font-size: 1rem; left: 10px;}
+.botao-amimir-interativo.ativo .z3 { animation: flutuarZ 2s ease-out infinite 1.0s; font-size: 1.2rem; left: 20px;}
+
+@keyframes pulsarSuave {
+  0% { transform: scale(1); box-shadow: 0 10px 25px hsla(var(--primary) / 0.4); }
+  50% { transform: scale(1.03); box-shadow: 0 15px 35px hsla(var(--primary) / 0.5); }
+  100% { transform: scale(1); box-shadow: 0 10px 25px hsla(var(--primary) / 0.4); }
+}
+
+@keyframes flutuarZ {
+  0% { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-40px) translateX(10px) rotate(15deg); }
+}
