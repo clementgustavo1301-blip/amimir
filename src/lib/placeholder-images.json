@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "about-gummy",
+      "description": "A close-up of a single Mimir melatonin gummy, showing its texture and sugar coating.",
+      "imageUrl": "https://images.unsplash.com/photo-1668440241233-42aa9862a6b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxndW1teSUyMHN1cHBsZW1lbnR8ZW58MHx8fHwxNzcxNTU2ODA0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gummy supplement"
+    },
+    {
+      "id": "ingredient-melatonin",
+      "description": "Abstract representation of melatonin molecules.",
+      "imageUrl": "https://images.unsplash.com/photo-1682305785810-220bcd4c2f39?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMG1vbGVjdWxlfGVufDB8fHx8MTc3MTU1NjgwNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract molecule"
+    },
+    {
+      "id": "ingredient-fruit",
+      "description": "Macro shot of passion fruit pulp and seeds.",
+      "imageUrl": "https://images.unsplash.com/photo-1464287047163-e0b510b491e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwYXNzaW9uJTIwZnJ1aXR8ZW58MHx8fHwxNzcxNTU2ODA0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "passion fruit"
+    },
+    {
+      "id": "ingredient-pectin",
+      "description": "Close-up of green apple slices, a source of pectin.",
+      "imageUrl": "https://images.unsplash.com/photo-1515846793739-9528018713bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhcHBsZSUyMHNsaWNlc3xlbnwwfHx8fDE3NzE0Njg4NzV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "apple slices"
+    }
+  ]
 }
