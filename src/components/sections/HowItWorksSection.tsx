@@ -48,7 +48,7 @@ export default function HowItWorksSection() {
   const div1Ref = useRef<HTMLDivElement>(null); // Melatonina
   const div2Ref = useRef<HTMLDivElement>(null); // Maracujá
   const div3Ref = useRef<HTMLDivElement>(null); // Pectina
-  const div4Ref = useRef<HTMLDivElement>(null); // Mimir Gummy (Center)
+  const div4Ref = useRef<HTMLDivElement>(null); // Amimir Gummy (Center)
   const div5Ref = useRef<HTMLDivElement>(null); // Sono Rápido
   const div6Ref = useRef<HTMLDivElement>(null); // Sono Profundo
   const div7Ref = useRef<HTMLDivElement>(null); // Acordar Renovado
@@ -58,7 +58,7 @@ export default function HowItWorksSection() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tighter font-headline">
-            Como Mimir Transforma Sua Noite
+            Como Amimir Transforma Sua Noite
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
             Da fórmula à absorção, veja a jornada para um sono perfeito.
@@ -98,7 +98,7 @@ export default function HowItWorksSection() {
                 <Circle ref={div4Ref} className="h-20 w-20 border-accent">
                   <ShieldCheck className="h-8 w-8 text-accent" />
                 </Circle>
-                <IconLabel>Fórmula Mimir</IconLabel>
+                <IconLabel>Fórmula Amimir</IconLabel>
               </IconWrapper>
             </div>
 

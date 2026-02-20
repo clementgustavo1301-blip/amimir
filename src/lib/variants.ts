@@ -11,7 +11,7 @@ export type ProductVariant = {
 export const variants: ProductVariant[] = [
   {
     id: "maracuja",
-    name: "MIMIR",
+    name: "Amimir",
     subtitle: "MELATONINA",
     description: "Gomas de melatonina sabor maracujá para noites profundamente restauradoras.",
     themeColor: "263 60% 48%", // Deep Violet

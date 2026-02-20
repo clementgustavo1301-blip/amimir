@@ -14,7 +14,7 @@ export const MimirLogo = (props: React.SVGProps<SVGSVGElement>) => (
       letterSpacing="0.1em"
       fill="currentColor"
     >
-      MIMIR
+      AMIMIR
     </text>
   </svg>
 );
