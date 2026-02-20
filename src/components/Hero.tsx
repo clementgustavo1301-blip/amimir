@@ -83,7 +83,7 @@ const Hero = ({ variant, preloadedImages }: HeroProps) => {
   }, [preloadedImages]);
 
   return (
-    <div id="home" ref={scrollRef} className="h-[300vh] relative">
+    <div id="home" ref={scrollRef} className="h-[200vh] relative">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-black/30" />
