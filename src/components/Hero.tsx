@@ -103,10 +103,10 @@ const Hero = ({ variant, preloadedImages }: HeroProps) => {
               {variant.description}
             </p>
             <div className="mt-8 flex gap-4">
-              <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black font-bold rounded-full">
+              <Button size="lg" className="bg-variant text-primary-foreground hover:brightness-90 font-bold rounded-full transition-all duration-300 hover:scale-105">
                 Comprar Agora
               </Button>
-              <Button size="lg" className="bg-[var(--variant-color)] text-black font-bold rounded-full">
+              <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black font-bold rounded-full transition-transform duration-300 hover:scale-105">
                 Saber Mais
               </Button>
             </div>
