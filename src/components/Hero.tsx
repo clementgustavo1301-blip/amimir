@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { type ProductVariant } from '@/lib/variants';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -12,20 +12,16 @@ type HeroProps = {
 
 const Hero = ({ variant, preloadedImages }: HeroProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const [showText, setShowText] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    if (preloadedImages.length > 0) {
-      setImages(preloadedImages);
-      setTimeout(() => setShowText(true), 100);
-    }
-  }, [preloadedImages]);
+  const [showText, setShowText] = useState(false);
 
   useEffect(() => {
-    if (!images.length) return;
+    if (!preloadedImages.length) return;
 
+    // Show text once images are loaded
+    setShowText(true);
+
+    const images = preloadedImages;
     const canvas = canvasRef.current;
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
@@ -67,7 +63,7 @@ const Hero = ({ variant, preloadedImages }: HeroProps) => {
       requestAnimationFrame(render);
     };
 
-    handleResize();
+    handleResize(); // Initial setup and render
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
 
@@ -75,7 +71,7 @@ const Hero = ({ variant, preloadedImages }: HeroProps) => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, [images]);
+  }, [preloadedImages]);
 
   return (
     <div id="home" ref={scrollRef} className="h-[300vh] relative">
