@@ -131,15 +131,12 @@ export default function HowItWorksSection() {
           {/* Beams */}
           {isHovered && (
             <>
-              {/* Beams from Inputs to Center with staggered delay */}
-              <AnimatedBeam containerRef={containerRef} fromRef={div1Ref} toRef={div4Ref} curvature={-40} startYOffset={-10} delay={0} />
-              <AnimatedBeam containerRef={containerRef} fromRef={div2Ref} toRef={div4Ref} delay={0.15} />
-              <AnimatedBeam containerRef={containerRef} fromRef={div3Ref} toRef={div4Ref} curvature={40} startYOffset={10} delay={0.3} />
-
-              {/* Beams from Center to Outputs with staggered delay */}
-              <AnimatedBeam containerRef={containerRef} fromRef={div4Ref} toRef={div5Ref} curvature={40} endYOffset={10} reverse delay={0.45} />
-              <AnimatedBeam containerRef={containerRef} fromRef={div4Ref} toRef={div6Ref} reverse delay={0.6} />
-              <AnimatedBeam containerRef={containerRef} fromRef={div4Ref} toRef={div7Ref} curvature={-40} endYOffset={-10} reverse delay={0.75} />
+              <AnimatedBeam containerRef={containerRef} fromRef={div1Ref} toRef={div4Ref} curvature={-40} endYOffset={-10} />
+              <AnimatedBeam containerRef={containerRef} fromRef={div2Ref} toRef={div4Ref} />
+              <AnimatedBeam containerRef={containerRef} fromRef={div3Ref} toRef={div4Ref} curvature={40} endYOffset={10} />
+              <AnimatedBeam containerRef={containerRef} fromRef={div4Ref} toRef={div5Ref} curvature={40} endYOffset={10} reverse />
+              <AnimatedBeam containerRef={containerRef} fromRef={div4Ref} toRef={div6Ref} reverse />
+              <AnimatedBeam containerRef={containerRef} fromRef={div4Ref} toRef={div7Ref} curvature={-40} endYOffset={-10} reverse />
             </>
           )}
         </div>
