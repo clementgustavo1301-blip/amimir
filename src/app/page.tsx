@@ -8,13 +8,13 @@ import Hero from '@/components/Hero';
 import AboutSection from '@/components/sections/AboutSection';
 import BenefitsSection from '@/components/sections/BenefitsSection';
 import IngredientsSection from '@/components/sections/IngredientsSection';
-import HowToUseSection from '@/components/sections/HowToUseSection';
+import HowItWorksSection from '@/components/sections/HowItWorksSection';
 import ReviewsSection from '@/components/sections/ReviewsSection';
 import FaqSection from '@/components/sections/FaqSection';
 import FinalCtaSection from '@/components/sections/FinalCtaSection';
 import Footer from '@/components/layout/Footer';
 
-const sectionIds = ['home', 'sobre', 'ingredientes', 'beneficios', 'como-usar', 'avaliacoes', 'faq', 'contato'];
+const sectionIds = ['home', 'sobre', 'ingredientes', 'beneficios', 'como-funciona', 'avaliacoes', 'faq', 'contato'];
 
 export default function Home() {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -29,6 +29,10 @@ export default function Home() {
     }
   }, [currentVariant]);
   
+  const handleImagesLoaded = (images: HTMLImageElement[]) => {
+    setPreloadedImages(images);
+  };
+
   if (isInitialLoading) {
     return (
       <Preloader
@@ -36,7 +40,7 @@ export default function Home() {
         variant={currentVariant}
         onLoadComplete={() => setIsInitialLoading(false)}
         onProgress={setInitialLoadingProgress}
-        onImagesLoaded={setPreloadedImages}
+        onImagesLoaded={handleImagesLoaded}
       />
     );
   }
@@ -53,7 +57,7 @@ export default function Home() {
           <AboutSection />
           <IngredientsSection />
           <BenefitsSection />
-          <HowToUseSection />
+          <HowItWorksSection />
           <ReviewsSection />
           <FaqSection />
           <FinalCtaSection />

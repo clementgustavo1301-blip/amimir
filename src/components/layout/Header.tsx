@@ -8,7 +8,7 @@ const navLinks = [
   { href: '#sobre', label: 'Sobre' },
   { href: '#ingredientes', label: 'Ingredientes' },
   { href: '#beneficios', label: 'Benefícios' },
-  { href: '#como-usar', label: 'Como Usar' },
+  { href: '#como-funciona', label: 'Como Funciona' },
   { href: '#avaliacoes', label: 'Avaliações' },
   { href: '#faq', label: 'FAQ' },
   { href: '#contato', label: 'Contato' },
