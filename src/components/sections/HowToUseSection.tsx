@@ -9,7 +9,7 @@ const steps = [
   {
     step: "02",
     title: "Desfrute",
-    description: "Tome uma goma de melatonina Mimir e aprecie o sabor.",
+    description: "Tome uma goma de melatonina Amimir e aprecie o sabor.",
   },
   {
     step: "03",
@@ -27,7 +27,7 @@ const HowToUseSection = () => {
             Seu Ritual Noturno Simplificado
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Integrar Mimir à sua rotina é fácil e prazeroso.
+            Integrar Amimir à sua rotina é fácil e prazeroso.
           </p>
         </div>
         <div className="relative">

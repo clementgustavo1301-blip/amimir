@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Mimir Zenith',
+  title: 'Amimir Zenith',
   description: 'Gomas de melatonina para noites profundamente restauradoras.',
 };
 

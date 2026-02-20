@@ -13,7 +13,7 @@ const AboutSection = () => {
               A Simplicidade de uma Boa Noite de Sono.
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Mimir nasceu da crença de que o sono de qualidade é a base para uma vida plena. Nossas gomas de melatonina são formuladas com ingredientes premium, em um design elegante e minimalista, para transformar seu ritual noturno em um momento de puro bem-estar e restauração.
+              Amimir nasceu da crença de que o sono de qualidade é a base para uma vida plena. Nossas gomas de melatonina são formuladas com ingredientes premium, em um design elegante e minimalista, para transformar seu ritual noturno em um momento de puro bem-estar e restauração.
             </p>
           </div>
           <div>

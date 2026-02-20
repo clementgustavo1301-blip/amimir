@@ -1,6 +1,6 @@
-export const MimirLogo = (props: React.SVGProps<SVGSVGElement>) => (
+export const AmimirLogo = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
-    viewBox="0 0 100 20"
+    viewBox="0 0 120 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
@@ -14,7 +14,7 @@ export const MimirLogo = (props: React.SVGProps<SVGSVGElement>) => (
       letterSpacing="0.1em"
       fill="currentColor"
     >
-      MIMIR
+      AMIMIR
     </text>
   </svg>
 );

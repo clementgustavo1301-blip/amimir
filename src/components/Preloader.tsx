@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useCallback } from 'react';
-import { MimirLogo } from '@/components/MimirLogo';
+import { AmimirLogo } from '@/components/MimirLogo';
 import { Progress } from '@/components/ui/progress';
 import { ProductVariant } from '@/lib/variants';
 
@@ -43,7 +43,7 @@ const Preloader = ({ progress, variant, onLoadComplete, onProgress }: PreloaderP
   return (
     <div className="fixed inset-0 bg-background flex flex-col items-center justify-center z-[100]">
       <div className="w-full max-w-xs flex flex-col items-center gap-6">
-        <MimirLogo className="h-10 w-auto text-primary" />
+        <AmimirLogo className="h-10 w-auto text-primary" />
         <div className="w-full">
           <Progress value={progress} className="h-1 bg-primary/20" />
           <p className="text-center text-sm text-muted-foreground mt-2 font-mono">

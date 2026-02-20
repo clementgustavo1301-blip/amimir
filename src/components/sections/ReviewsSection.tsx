@@ -12,7 +12,7 @@ const testimonials = [
   {
     name: "Marcos P.",
     avatar: "MP",
-    review: "Mimir se tornou parte essencial do meu ritual noturno. A qualidade é notável. Recomendo a todos que buscam melhorar o sono.",
+    review: "Amimir se tornou parte essencial do meu ritual noturno. A qualidade é notável. Recomendo a todos que buscam melhorar o sono.",
     rating: 5,
   },
   {

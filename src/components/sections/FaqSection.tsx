@@ -15,15 +15,15 @@ const faqs = [
     answer: "A dosagem ideal pode variar. Nossas gomas são formuladas com uma dose padrão eficaz. Comece com uma goma antes de dormir e ajuste conforme necessário, ou siga a orientação do seu médico.",
   },
   {
-    question: "Posso tomar Mimir todas as noites?",
-    answer: "Mimir é projetado para uso ocasional ou para ajudar a regular seu ciclo de sono. Para uso contínuo, é melhor consultar um profissional de saúde para garantir que é a melhor abordagem para você.",
+    question: "Posso tomar Amimir todas as noites?",
+    answer: "Amimir é projetado para uso ocasional ou para ajudar a regular seu ciclo de sono. Para uso contínuo, é melhor consultar um profissional de saúde para garantir que é a melhor abordagem para você.",
   },
   {
     question: "Quanto tempo antes de dormir devo tomar?",
-    answer: "Recomendamos tomar uma goma de Mimir cerca de 30 a 60 minutos antes da hora de dormir para permitir que a melatonina comece a fazer efeito.",
+    answer: "Recomendamos tomar uma goma de Amimir cerca de 30 a 60 minutos antes da hora de dormir para permitir que a melatonina comece a fazer efeito.",
   },
   {
-    question: "Mimir tem efeitos colaterais?",
+    question: "Amimir tem efeitos colaterais?",
     answer: "A melatonina é geralmente bem tolerada, mas alguns indivíduos podem sentir sonolência diurna, tontura ou dores de cabeça. Se ocorrerem efeitos adversos, interrompa o uso e consulte um médico.",
   },
 ];
@@ -37,7 +37,7 @@ const FaqSection = () => {
             Perguntas Frequentes
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Tudo o que você precisa saber sobre Mimir.
+            Tudo o que você precisa saber sobre Amimir.
           </p>
         </div>
         <Accordion type="single" collapsible className="w-full">

@@ -1,6 +1,6 @@
 "use client";
 
-import { MimirLogo } from '@/components/MimirLogo';
+import { AmimirLogo } from '@/components/MimirLogo';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { cn } from '@/lib/utils';
 
@@ -28,7 +28,7 @@ const Header = ({ sectionIds }: HeaderProps) => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20 bg-background/80 backdrop-blur-sm rounded-b-lg border-b border-x border-border/50 px-6">
           <a href="#home" aria-label="Voltar ao topo">
-            <MimirLogo className="h-6 w-auto text-primary" />
+            <AmimirLogo className="h-6 w-auto text-primary" />
           </a>
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map(({ href, label }) => (
