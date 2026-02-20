@@ -14,7 +14,7 @@ import FaqSection from '@/components/sections/FaqSection';
 import FinalCtaSection from '@/components/sections/FinalCtaSection';
 import Footer from '@/components/layout/Footer';
 
-const sectionIds = ['home', 'sobre', 'ingredientes', 'como-funciona', 'beneficios', 'avaliacoes', 'faq', 'contato'];
+const sectionIds = ['home', 'sobre', 'avaliacoes', 'ingredientes', 'como-funciona', 'beneficios', 'faq', 'contato'];
 
 export default function Home() {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -55,10 +55,10 @@ export default function Home() {
         />
         <div className="relative z-10 bg-background">
           <AboutSection />
+          <ReviewsSection />
           <IngredientsSection />
           <HowItWorksSection />
           <BenefitsSection />
-          <ReviewsSection />
           <FaqSection />
           <FinalCtaSection />
         </div>

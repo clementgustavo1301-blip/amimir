@@ -6,10 +6,10 @@ import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '#sobre', label: 'Sobre' },
+  { href: '#avaliacoes', label: 'Avaliações' },
   { href: '#ingredientes', label: 'Ingredientes' },
   { href: '#como-funciona', label: 'Como Funciona' },
   { href: '#beneficios', label: 'Benefícios' },
-  { href: '#avaliacoes', label: 'Avaliações' },
   { href: '#faq', label: 'FAQ' },
   { href: '#contato', label: 'Contato' },
 ];
