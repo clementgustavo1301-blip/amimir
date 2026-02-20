@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { variants } from '@/lib/variants';
-import Preloader from '@/components/Preloader';
 import Header from '@/components/layout/Header';
 import Hero from '@/components/Hero';
 import AboutSection from '@/components/sections/AboutSection';
@@ -17,33 +16,50 @@ import Footer from '@/components/layout/Footer';
 const sectionIds = ['home', 'sobre', 'avaliacoes', 'ingredientes', 'como-funciona', 'beneficios', 'faq', 'contato'];
 
 export default function Home() {
-  const [isInitialLoading, setIsInitialLoading] = useState(true);
-  const [initialLoadingProgress, setInitialLoadingProgress] = useState(0);
   const [preloadedImages, setPreloadedImages] = useState<HTMLImageElement[]>([]);
   
   const currentVariant = variants[0];
+
+  const preloadInitialImages = useCallback(() => {
+    if (!currentVariant) return;
+    const numImages = currentVariant.frameCount;
+    const promises: Promise<HTMLImageElement | null>[] = [];
+
+    for (let i = 0; i < numImages; i++) {
+      const img = new Image();
+      const frameNumber = String(i).padStart(3, '0');
+      img.src = `${currentVariant.framesPath}frame_${frameNumber}_delay-0.042s.webp`;
+      
+      const promise = new Promise<HTMLImageElement | null>((resolve) => {
+        img.onload = () => resolve(img);
+        img.onerror = (err) => {
+          console.error(`Failed to load image frame: ${i}`, err);
+          resolve(null);
+        };
+      });
+      promises.push(promise);
+    }
+
+    Promise.all(promises).then((loadedImageElements) => {
+      const successfulImages = loadedImageElements.filter((img): img is HTMLImageElement => img !== null);
+      
+      Promise.all(successfulImages.map(img => img.decode()))
+        .then(() => {
+          setPreloadedImages(successfulImages);
+        })
+        .catch(err => {
+          console.error("Error decoding images:", err);
+          setPreloadedImages(successfulImages);
+        });
+    });
+  }, [currentVariant]);
 
   useEffect(() => {
     if (currentVariant) {
       document.documentElement.style.setProperty('--variant-color-hsl', currentVariant.themeColor);
     }
-  }, [currentVariant]);
-  
-  const handleImagesLoaded = (images: HTMLImageElement[]) => {
-    setPreloadedImages(images);
-  };
-
-  if (isInitialLoading) {
-    return (
-      <Preloader
-        progress={initialLoadingProgress}
-        variant={currentVariant}
-        onLoadComplete={() => setIsInitialLoading(false)}
-        onProgress={setInitialLoadingProgress}
-        onImagesLoaded={handleImagesLoaded}
-      />
-    );
-  }
+    preloadInitialImages();
+  }, [currentVariant, preloadInitialImages]);
 
   return (
     <>
