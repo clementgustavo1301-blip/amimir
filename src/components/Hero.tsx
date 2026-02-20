@@ -30,10 +30,10 @@ const Hero = ({ variant }: HeroProps) => {
       }
     };
 
-    for (let i = 1; i <= numImages; i++) {
+    for (let i = 0; i < numImages; i++) {
       const img = new Image();
-      const frameNumber = String(i).padStart(4, '0');
-      img.src = `${v.framesPath}frame_${frameNumber}.webp`;
+      const frameNumber = String(i).padStart(3, '0');
+      img.src = `${v.framesPath}frame_${frameNumber}_delay-0.042s.webp`;
       img.onload = imageLoaded;
       img.onerror = imageLoaded; // Count errors as loaded to not block forever
       newImages.push(img);
@@ -117,10 +117,10 @@ const Hero = ({ variant }: HeroProps) => {
               {variant.description}
             </p>
             <div className="mt-8 flex gap-4">
-              <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black font-bold">
+              <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black font-bold rounded-full">
                 Comprar Agora
               </Button>
-              <Button size="lg" className="bg-[var(--variant-color)] text-black font-bold">
+              <Button size="lg" className="bg-[var(--variant-color)] text-black font-bold rounded-full">
                 Saber Mais
               </Button>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useCallback } from 'react';
-import { AmimirLogo } from '@/components/MimirLogo';
+import { MimirLogo } from '@/components/MimirLogo';
 import { Progress } from '@/components/ui/progress';
 import { ProductVariant } from '@/lib/variants';
 
@@ -27,10 +27,10 @@ const Preloader = ({ progress, variant, onLoadComplete, onProgress }: PreloaderP
       }
     };
 
-    for (let i = 1; i <= numImages; i++) {
+    for (let i = 0; i < numImages; i++) {
       const img = new Image();
-      const frameNumber = String(i).padStart(4, '0');
-      img.src = `${variant.framesPath}frame_${frameNumber}.webp`;
+      const frameNumber = String(i).padStart(3, '0');
+      img.src = `${variant.framesPath}frame_${frameNumber}_delay-0.042s.webp`;
       img.onload = imageLoaded;
       img.onerror = imageLoaded;
     }
@@ -43,7 +43,7 @@ const Preloader = ({ progress, variant, onLoadComplete, onProgress }: PreloaderP
   return (
     <div className="fixed inset-0 bg-background flex flex-col items-center justify-center z-[100]">
       <div className="w-full max-w-xs flex flex-col items-center gap-6">
-        <AmimirLogo className="h-10 w-auto text-primary" />
+        <MimirLogo className="h-10 w-auto text-primary" />
         <div className="w-full">
           <Progress value={progress} className="h-1 bg-primary/20" />
           <p className="text-center text-sm text-muted-foreground mt-2 font-mono">

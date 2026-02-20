@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Amimir Zenith',
-  description: 'Gomas de melatonina para noites profundamente restauradoras.',
+  title: 'Mimir',
+  description: 'Premium melatonin gummies designed for restorative sleep with modern elegance.',
 };
 
 export default function RootLayout({

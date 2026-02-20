@@ -1,4 +1,4 @@
-import { AmimirLogo } from '@/components/MimirLogo';
+import { MimirLogo } from '@/components/MimirLogo';
 import { Button } from '@/components/ui/button';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 
@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
-            <AmimirLogo className="h-8 w-auto mb-4 text-primary" />
+            <MimirLogo className="h-8 w-auto mb-4 text-primary" />
             <p className="text-muted-foreground text-sm max-w-xs">
               Durma melhor. Viva melhor.
             </p>
@@ -36,7 +36,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-border/50 mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Amimir. Todos os direitos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} Mimir. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
