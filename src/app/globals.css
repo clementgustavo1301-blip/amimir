@@ -4,37 +4,45 @@
 
 @layer base {
   :root {
-    --background: 266 17% 12%; /* #1E1A23 */
-    --foreground: 0 0% 98%;
+    --background: 266 17% 8%;
+    /* Deeper, richer dark */
+    --foreground: 0 0% 96%;
 
-    --card: 266 17% 15%;
-    --card-foreground: 0 0% 98%;
+    --card: 266 17% 11%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 266 17% 12%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 266 17% 10%;
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 263 60% 48%; /* #6A2EB8 */
+    --primary: 263 60% 48%;
+    /* Deep Violet */
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 266 17% 20%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 266 17% 16%;
+    --secondary-foreground: 0 0% 96%;
 
-    --muted: 266 17% 20%;
-    --muted-foreground: 0 0% 63.9%;
+    --muted: 266 17% 18%;
+    --muted-foreground: 260 10% 58%;
 
-    --accent: 251 100% 70%; /* #8468FF */
-    --accent-foreground: 266 17% 12%;
+    --accent: 251 100% 70%;
+    /* Vivid Lavender */
+    --accent-foreground: 266 17% 8%;
+
+    --gold: 40 72% 60%;
+    /* Warm Gold accent */
+    --gold-foreground: 40 10% 10%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 266 17% 22%;
-    --input: 266 17% 20%;
+    --border: 266 14% 18%;
+    --input: 266 17% 16%;
     --ring: 251 100% 70%;
-    
-    --radius: 0.5rem;
 
-    --variant-color-hsl: 263 60% 48%; /* Default to Maracujá Deep Violet */
+    --radius: 0.75rem;
+    --glow: 263 80% 60%;
+
+    --variant-color-hsl: 263 60% 48%;
   }
 }
 
@@ -42,91 +50,179 @@
   * {
     @apply border-border;
   }
+
   html {
     @apply scroll-smooth;
   }
+
   body {
-    /* bg-background is removed to allow particles to be visible */
     @apply text-foreground;
   }
 }
 
-/* Sleep Particles Effect */
-#sleep-particles-container {
+/* ───────────────── Noise / Grain Texture Overlay ───────────────── */
+.noise-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  inset: 0;
+  z-index: 9999;
   pointer-events: none;
-  z-index: -10;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
 }
 
-.sleep-particle {
+/* ───────────────── Section Headers ───────────────── */
+.section-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: hsl(var(--accent));
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.section-eyebrow::before {
+  content: '';
   position: absolute;
-  display: block;
-  font-size: var(--size);
-  left: var(--start-x);
-  top: var(--start-y);
-  opacity: var(--opacity);
-  filter: blur(1px);
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem;
+  height: 1px;
+  background: hsl(var(--accent));
+}
+
+
+/* ───────────────── Reusable Animation Keyframes ───────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px hsla(var(--accent) / 0.2), 0 0 60px hsla(var(--primary) / 0.1);
+  }
+
+  50% {
+    box-shadow: 0 0 30px hsla(var(--accent) / 0.35), 0 0 80px hsla(var(--primary) / 0.2);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ───────────────── Glassmorphism Utilities ───────────────── */
+.glass {
+  background: hsla(var(--card) / 0.5);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid hsla(var(--border) / 0.5);
+}
+
+.glass-strong {
+  background: hsla(var(--card) / 0.7);
+  backdrop-filter: blur(30px) saturate(1.6);
+  -webkit-backdrop-filter: blur(30px) saturate(1.6);
+  border: 1px solid hsla(var(--border) / 0.6);
+}
+
+/* ───────────────── Glow Orb ───────────────── */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
   will-change: transform;
-  animation: var(--animation-name) var(--duration) ease-in-out infinite alternate;
-  animation-delay: var(--delay);
+  animation: float 8s ease-in-out infinite;
 }
 
-.particle-moon { 
-  color: hsl(var(--accent) / 0.6);
-  filter: drop-shadow(0 0 5px hsla(var(--accent) / 0.3));
-}
-.particle-star { 
-  color: hsl(var(--accent) / 0.8);
-}
-.particle-cloud { 
-  color: hsl(var(--foreground)); 
-  opacity: 0.2 !important;
-}
-.particle-zzz { 
-  color: hsl(var(--primary) / 0.7); 
-  font-weight: bold; 
-  font-family: sans-serif;
+.glow-orb-primary {
+  background: radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%);
 }
 
-@keyframes drift-1 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(50px, -80px) rotate(20deg); }
+.glow-orb-accent {
+  background: radial-gradient(circle, hsl(var(--accent)) 0%, transparent 70%);
 }
 
-@keyframes drift-2 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(-40px, 60px) rotate(-15deg); }
+.glow-orb-gold {
+  background: radial-gradient(circle, hsl(var(--gold)) 0%, transparent 70%);
 }
 
-@keyframes drift-3 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(30px, 30px) rotate(10deg); }
-}
-
-/* Deck Effect for Benefits Section */
+/* ───────────────── Deck Effect for Benefits Section ───────────────── */
 .deck-container {
   display: flex;
   flex-direction: column;
-  gap: 5vh;
-  padding: 3rem 1.25rem 25rem 1.25rem;
+  gap: 4vh;
+  padding: 40px 16px 300px 16px;
   max-width: 800px;
   margin: 0 auto;
 }
 
+@media (min-width: 768px) {
+  .deck-container {
+    gap: 5vh;
+    padding: 50px 20px 400px 20px;
+  }
+}
+
 .deck-card {
   position: sticky;
-  top: calc(6rem + (2rem * var(--index)));
+  top: calc(80px + (20px * var(--index)));
   background-color: hsl(var(--card));
-  border-radius: 24px;
-  padding: 40px;
-  min-height: 300px;
+  border-radius: 20px;
+  padding: 30px 24px;
+  min-height: 280px;
   border: 1px solid hsl(var(--border));
-  box-shadow: 0 -10px 30px -15px hsla(var(--primary) / 0.1), 0 4px 15px hsla(var(--background) / 0.2);
+  box-shadow: 0 -15px 30px hsla(var(--background) / 0.6);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -136,58 +232,136 @@
   will-change: transform, box-shadow;
 }
 
+@media (min-width: 768px) {
+  .deck-card {
+    top: calc(40px + (30px * var(--index)));
+    padding: 50px 40px;
+    min-height: 350px;
+    border-radius: 24px;
+  }
+}
+
+/* Subtle background variation per card for depth */
+.deck-card:nth-child(1) {
+  background-color: hsl(var(--card));
+}
+
+.deck-card:nth-child(2) {
+  background-color: hsl(var(--card) / 0.95);
+}
+
+.deck-card:nth-child(3) {
+  background-color: hsl(var(--card) / 0.9);
+}
+
+.deck-card:nth-child(4) {
+  background-color: hsl(var(--card) / 0.85);
+}
+
+/* Gradient left border accent */
+.deck-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, hsl(var(--accent)), hsl(var(--primary)));
+  border-radius: 4px 0 0 4px;
+}
+
+.deck-card:nth-child(2)::before {
+  background: linear-gradient(to bottom, hsl(var(--gold)), hsl(var(--primary)));
+}
+
+.deck-card:nth-child(3)::before {
+  background: linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--accent)));
+}
+
+.deck-card:nth-child(4)::before {
+  background: linear-gradient(to bottom, hsl(263 80% 60%), hsl(var(--gold)));
+}
+
 .deck-card:hover {
   transform: scale(1.02);
-  box-shadow: 0 -15px 40px -15px hsla(var(--primary) / 0.2), 0 8px 25px hsla(var(--background) / 0.3);
+  box-shadow: 0 -15px 40px hsla(var(--primary) / 0.2), 0 8px 25px hsla(var(--background) / 0.3);
 }
 
 .card-tag {
-  background: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  padding: 6px 14px;
+  background: hsla(var(--accent) / 0.12);
+  color: hsl(var(--accent));
+  padding: 4px 12px;
   border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-bottom: 12px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  border: 1px solid hsla(var(--accent) / 0.15);
+}
+
+@media (min-width: 768px) {
+  .card-tag {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
 }
 
 .deck-card h2 {
-  font-size: 2.25rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  letter-spacing: -0.05em;
-  margin: 0 0 15px 0;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px 0;
   color: hsl(var(--foreground));
-  max-width: 90%;
+  max-width: 100%;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .deck-card h2 {
+    font-size: 2.5rem;
+    letter-spacing: -0.03em;
+    margin: 0 0 15px 0;
+    max-width: 90%;
+  }
 }
 
 .deck-card p {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: hsl(var(--muted-foreground));
   line-height: 1.6;
   margin: 0;
-  max-width: 90%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .deck-card p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 90%;
+  }
 }
 
 
-/* --- Interactive CTA Button --- */
+/* ─── Interactive CTA Button ─── */
 .botao-amimir-interativo {
   position: relative;
-  width: 280px; 
+  width: 280px;
   height: 70px;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   overflow: hidden;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
-  box-shadow: 0 10px 25px hsla(var(--primary) / 0.4);
+  box-shadow: 0 10px 40px hsla(var(--primary) / 0.4), 0 0 60px hsla(var(--accent) / 0.15);
   transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .botao-amimir-interativo:not(.ativo) {
-  animation: pulsarSuave 2s infinite;
+  animation: pulsarSuave 2.5s infinite;
 }
 
 .estado-comprar {
@@ -196,10 +370,10 @@
   justify-content: center;
   gap: 12px;
   color: hsl(var(--accent-foreground));
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -208,9 +382,9 @@
   transition: all 0.5s ease-in-out;
 }
 
-.btn-icone { 
-  width: 24px; 
-  height: 24px; 
+.btn-icone {
+  width: 22px;
+  height: 22px;
   color: hsl(var(--accent-foreground));
 }
 
@@ -230,12 +404,20 @@
 }
 
 .personagem-nuvem {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   padding: 5px;
 }
-.emoji-sono { font-size: 2.5rem; }
-.texto-final { font-weight: 600; font-size: 1.1rem; }
+
+.emoji-sono {
+  font-size: 2.5rem;
+}
+
+.texto-final {
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+}
 
 .botao-amimir-interativo.ativo {
   background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary)));
@@ -267,18 +449,81 @@
   opacity: 0;
 }
 
-.botao-amimir-interativo.ativo .z1 { animation: flutuarZ 2s ease-out infinite 0.2s; font-size: 0.8rem;}
-.botao-amimir-interativo.ativo .z2 { animation: flutuarZ 2s ease-out infinite 0.6s; font-size: 1rem; left: 10px;}
-.botao-amimir-interativo.ativo .z3 { animation: flutuarZ 2s ease-out infinite 1.0s; font-size: 1.2rem; left: 20px;}
+.botao-amimir-interativo.ativo .z1 {
+  animation: flutuarZ 2s ease-out infinite 0.2s;
+  font-size: 0.8rem;
+}
+
+.botao-amimir-interativo.ativo .z2 {
+  animation: flutuarZ 2s ease-out infinite 0.6s;
+  font-size: 1rem;
+  left: 10px;
+}
+
+.botao-amimir-interativo.ativo .z3 {
+  animation: flutuarZ 2s ease-out infinite 1.0s;
+  font-size: 1.2rem;
+  left: 20px;
+}
 
 @keyframes pulsarSuave {
-  0% { transform: scale(1); box-shadow: 0 10px 25px hsla(var(--primary) / 0.4); }
-  50% { transform: scale(1.03); box-shadow: 0 15px 35px hsla(var(--primary) / 0.5); }
-  100% { transform: scale(1); box-shadow: 0 10px 25px hsla(var(--primary) / 0.4); }
+  0% {
+    transform: scale(1);
+    box-shadow: 0 10px 40px hsla(var(--primary) / 0.4);
+  }
+
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 15px 50px hsla(var(--primary) / 0.5);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 10px 40px hsla(var(--primary) / 0.4);
+  }
 }
 
 @keyframes flutuarZ {
-  0% { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
-  30% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-40px) translateX(10px) rotate(15deg); }
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) translateX(10px) rotate(15deg);
+  }
+}
+
+/* ───────────────── Gradient Text Utility ───────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)), hsl(var(--gold)));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease-in-out infinite;
+}
+
+/* ───────────────── Scroll Indicator ───────────────── */
+@keyframes scrollBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+.scroll-indicator {
+  animation: scrollBounce 2s ease-in-out infinite;
 }

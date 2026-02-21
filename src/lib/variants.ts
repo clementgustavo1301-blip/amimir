@@ -15,7 +15,7 @@ export const variants: ProductVariant[] = [
     subtitle: "MELATONINA",
     description: "Gomas de melatonina sabor maracujá para noites profundamente restauradoras.",
     themeColor: "263 60% 48%", // Deep Violet
-    frameCount: 240,
+    frameCount: 166,
     framesPath: "https://htusdphdspwzzckskvit.supabase.co/storage/v1/object/public/amimir/",
   },
 ];

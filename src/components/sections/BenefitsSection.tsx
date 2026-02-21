@@ -1,4 +1,7 @@
+"use client";
+
 import { Bed, Award, Plane, Shield } from "lucide-react";
+import { motion } from "framer-motion";
 
 const benefits = [
   {
@@ -25,26 +28,34 @@ const benefits = [
 
 const BenefitsSection = () => {
   return (
-    <section id="beneficios" className="py-24 sm:py-32 bg-background">
+    <section id="beneficios" className="py-28 sm:py-36 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tighter font-headline">
-            Benefícios para sua Noite e seu Dia
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16 max-w-2xl mx-auto"
+        >
+          <span className="section-eyebrow">Vantagens</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight font-headline">
+            Benefícios para sua{' '}
+            <span className="gradient-text">Noite e seu Dia</span>
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-4 text-lg text-muted-foreground font-light">
             Mais do que apenas dormir, é sobre restaurar corpo e mente.
           </p>
-        </div>
-        
+        </motion.div>
+
         <div className="deck-container">
           {benefits.map((benefit, index) => (
-            <div 
+            <div
               key={index}
               className="deck-card group"
-              style={{ '--index': index } as React.CSSProperties}
+              style={{ '--index': index + 1 } as React.CSSProperties}
             >
-              <div className="absolute top-8 right-8 bg-primary/10 text-primary p-3 rounded-full group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300 ease-in-out">
-                <benefit.icon className="h-6 w-6" />
+              <div className="absolute top-8 right-8 w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 group-hover:shadow-[0_0_20px_hsla(251,100%,70%,0.15)] transition-all duration-500">
+                <benefit.icon className="h-5 w-5 text-accent" />
               </div>
               <span className="card-tag">Benefício {index + 1}</span>
               <h2>{benefit.title}</h2>

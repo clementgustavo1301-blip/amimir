@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import SleepParticles from '@/components/SleepParticles';
 
 export const metadata: Metadata = {
-  title: 'Amimir',
-  description: 'Amimir: Premium melatonin gummies designed for restorative sleep with modern elegance.',
+  title: 'Amimir — Melatonina Premium',
+  description: 'Amimir: Gomas de melatonina premium para noites restauradoras com elegância moderna.',
 };
 
 export default function RootLayout({
@@ -14,15 +13,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="pt-BR" className="dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
         <div className="fixed inset-0 bg-background -z-20" />
-        <SleepParticles />
+        <div className="noise-overlay" aria-hidden="true" />
         {children}
         <Toaster />
       </body>
